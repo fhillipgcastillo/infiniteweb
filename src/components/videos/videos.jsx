@@ -108,7 +108,7 @@ class Videos extends Component {
     this.changePage(page);
   };
   render() {
-    let videos = this.getByPages();
+    let videos = this.props.videos;//this.getByPages();
     return (
       <div className="row">
         {videos.map(video => {

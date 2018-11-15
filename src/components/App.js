@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import logo from "./logo.svg";
 import AppBar from "material-ui/AppBar";
 import MuiThemProvider from "material-ui/styles/MuiThemeProvider";
+import gql from 'graphql-tag'
+import {graphql} from 'react-apollo'
+import Videos from './videos/videos';
 
 import "./App.css";
 
@@ -26,17 +29,6 @@ class App extends Component {
   state = {
     msg: ""
   };
-  componentDidMount() {
-    var api = "http://localhost:8080";
-    // fetch(`${api}/api`)
-    //   .then(res => {
-    //     console.log(res);
-    //     return res.json()
-    //   })
-    //   .then(data => {
-    //     this.setState({ msg: data.msg });
-    //   });
-  }
   render() {
     return (
       <MuiThemProvider>
@@ -46,10 +38,29 @@ class App extends Component {
             iconClassNameRight="muidocs-icon-navigation-expand-more"
           />
           <Header />
+          {this.props.data.loading 
+          ? <div>Loading...</div>
+          : <Videos videos={this.props.data.allMovies} />
+          }
         </div>
       </MuiThemProvider>
     );
   }
 }
 
-export default App;
+const Queries = gql`
+{
+  allMovies {
+    id
+    title
+    year
+    released
+    actors
+    rating
+    covertImage
+  }
+}
+
+`;
+
+export default graphql(Queries)(App);
