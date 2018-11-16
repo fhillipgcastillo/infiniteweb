@@ -77,7 +77,7 @@ class Videos extends Component {
     //     this.setState({ videos: data || [] });
     //   });
     this.setState({
-      videos: this.props.videos,
+      videos: this.props.videos || [],
       currentPageNumber: this.props.currentPageNumber
     });
     this.setState({ sortBy: (va, vb) => vb.year - va.year });
@@ -108,11 +108,12 @@ class Videos extends Component {
     this.changePage(page);
   };
   render() {
-    let videos = this.props.videos;//this.getByPages();
+    console.log(this.state);
+    let videos = this.state.videos;//this.getByPages();
     return (
       <div className="row">
         {videos.map(video => {
-          return <VideoPreview key={video._id} {...video} />;
+          return <VideoPreview key={video.id} {...video} />;
         })}
         <div className="col-12">
           <Pagination

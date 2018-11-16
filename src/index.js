@@ -1,10 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import "./index.css";
+
 import App from "./components/App";
 import * as serviceWorker from "./serviceWorker";
 import { ApolloProvider } from "react-apollo";
 import { ApolloClient, HttpLink, InMemoryCache } from "apollo-client-preset";
+
 const HOSTNAME = "http://localhost";
 const PORT = 8080;
 
