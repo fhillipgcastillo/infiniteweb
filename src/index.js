@@ -11,7 +11,7 @@ import { ApolloClient, HttpLink, InMemoryCache } from "apollo-client-preset";
 const HOSTNAME = "http://localhost";
 const PORT = 8080;
 
-const uri = `http://localhost:8080/api`;
+const uri = `${HOSTNAME}:${PORT}/api`;
 const httpLink = new HttpLink({ uri: uri });
 
 const client = new ApolloClient({

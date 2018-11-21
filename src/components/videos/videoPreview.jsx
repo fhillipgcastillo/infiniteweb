@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
-import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
-import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
+// import Card from "@material-ui/core/Card";
+// import CardActionArea from "@material-ui/core/CardActionArea";
+// import CardActions from "@material-ui/core/CardActions";
+// import CardContent from "@material-ui/core/CardContent";
+// import CardMedia from "@material-ui/core/CardMedia";
+// import Button from "@material-ui/core/Button";
+// import Typography from "@material-ui/core/Typography";
+import moment from 'moment';
+
 
 const styles = {
   card: {
@@ -26,7 +28,7 @@ class VideoPreview extends Component {
         <img className="card-img-top" src={this.props.covertImage} alt="" />
         <div className="card-body">
           <h5 className="card-title">
-            {this.props.title + " " +(new Date(parseInt(this.props.released))) + " "}
+            {this.props.title + " " +(moment(new Date(parseInt(this.props.released))).format("YYYY")) + " "}
           </h5>
           <p className="card-text">{this.props.synopsis}</p>
           <p className="card-text">{this.props.rating}</p>

@@ -29,7 +29,7 @@ class App extends Component {
 
 const Queries = gql`
 {
-  allMovies {
+  allMovies: getLastMovies {
     id
     title
     year
@@ -40,7 +40,6 @@ const Queries = gql`
     synopsis
   }
 }
-
 `;
 
 export default graphql(Queries)(App);
