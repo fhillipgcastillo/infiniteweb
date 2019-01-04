@@ -1,29 +1,61 @@
 import React, { Component } from "react";
 import logo from "./logo.svg";
-import AppBar from "material-ui/AppBar";
+import NavBar from "./navbar/navbar";
 import MuiThemProvider from "material-ui/styles/MuiThemeProvider";
-import gql from 'graphql-tag'
-import {graphql} from 'react-apollo'
-import Videos from './videos/videos';
+import gql from "graphql-tag";
+import { graphql } from "react-apollo";
+import Videos from "./videos/videos";
+import VideosCarousel from "./videos/VideosCarousel";
 
 import "./App.css";
 
-const Header = props => (
-  <header className="App-header">
-    <img src={logo} className="App-logo" alt="logo" />
-    <p>
-      Edit <code>src/App.js</code> and save to reload.
-    </p>
-    <a
-      className="App-link"
-      href="https://reactjs.org"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      Learn React
-    </a>
-  </header>
-);
+const Queries = gql`
+  {
+    lastMovies: getLastMovies {
+      id
+      title
+      year
+      released
+      actors
+      rating
+      covertImage
+      synopsis
+      mediaContent
+    }
+    topMovies: allMovies(
+      orderBy: { released: -1 }
+      filter: { released: { from: "2017", to: "2019" } }
+      pageSize: 10
+      page: 1
+    ) {
+      id
+      title
+      year
+      released
+      actors
+      rating
+      covertImage
+      synopsis
+      mediaContent
+    }
+    recentlyUpdated: allMovies(
+      orderBy: { dateUpdated: -1 }
+      filter: { dateUpdated: { from: "2018", to: "2019" } }
+      pageSize: 10
+      page: 1
+    ) {
+      id
+      title
+      year
+      released
+      actors
+      rating
+      covertImage
+      synopsis
+      mediaContent
+    }
+  }
+`;
 
 class App extends Component {
   state = {
@@ -33,34 +65,29 @@ class App extends Component {
     return (
       <MuiThemProvider>
         <div className="App">
-          <AppBar
-            title={this.state.msg || "nothing"}
-            iconClassNameRight="muidocs-icon-navigation-expand-more"
-          />
-          <Header />
-          {this.props.data.loading 
-          ? <div>Loading...</div>
-          : <Videos videos={this.props.data.allMovies} />
-          }
+          <NavBar />
+          {this.props.data.loading ? (
+            <div>Loading...</div>
+          ) : (
+            <React.Fragment>
+              <div className="mainBillboard">
+                <h1>Banner</h1>
+              </div>
+              <Videos
+                videos={this.props.data.recentlyUpdated}
+                title="Recently Updated Videos"
+              />
+              <Videos
+                videos={this.props.data.topMovies}
+                title="Top Last Years Videos"
+              />
+              {/* <VideosCarousel /> */}
+            </React.Fragment>
+          )}
         </div>
       </MuiThemProvider>
     );
   }
 }
-
-const Queries = gql`
-{
-  allMovies {
-    id
-    title
-    year
-    released
-    actors
-    rating
-    covertImage
-  }
-}
-
-`;
 
 export default graphql(Queries)(App);

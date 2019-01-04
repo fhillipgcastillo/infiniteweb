@@ -68,16 +68,8 @@ class Videos extends Component {
     sortBy: () => {}
   };
   componentDidMount() {
-    // this.setState({ videos: this.props.videos || [] });
-    // fetch("http://varnatrd.tech/api/movies/")
-    //   .then((res) => {
-    //     return res.json();
-    //   })
-    //   .then(data => {
-    //     this.setState({ videos: data || [] });
-    //   });
     this.setState({
-      videos: this.props.videos,
+      videos: this.props.videos || [],
       currentPageNumber: this.props.currentPageNumber
     });
     this.setState({ sortBy: (va, vb) => vb.year - va.year });
@@ -108,20 +100,24 @@ class Videos extends Component {
     this.changePage(page);
   };
   render() {
-    let videos = this.props.videos;//this.getByPages();
+    console.log(this.state);
+    let videos = this.state.videos;//this.getByPages();
     return (
       <div className="row">
-        {videos.map(video => {
-          return <VideoPreview key={video._id} {...video} />;
-        })}
         <div className="col-12">
+          <h3>{this.props.title}</h3>
+        </div>
+        {videos.map(video => {
+          return <VideoPreview key={video.id} {...video} />;
+        })}
+        {/* <div className="col-12">
           <Pagination
             onPrevious={this.previousHandler}
             onNext={this.nextHandler}
             amountOfPages={this.getPagesAmount}
             currentPageNumber={this.state.currentPageNumber}
           />
-        </div>
+        </div> */}
       </div>
     );
   }
