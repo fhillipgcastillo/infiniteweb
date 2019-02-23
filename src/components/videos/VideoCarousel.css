@@ -1,0 +1,10 @@
+.carousel-item {
+  max-height: 250px;
+  display: inline;
+
+}
+
+.carousel-item.img {
+  height: 100%;
+  width: auto;
+}

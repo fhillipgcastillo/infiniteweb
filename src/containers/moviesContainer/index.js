@@ -1,13 +1,8 @@
 import React, { Component } from "react";
-import logo from "./logo.svg";
-import NavBar from "./navbar/navbar";
-import MuiThemProvider from "material-ui/styles/MuiThemeProvider";
 import gql from "graphql-tag";
 import { graphql } from "react-apollo";
-import Videos from "./videos/videos";
+import Videos from "../../components/videos/videos";
 // import VideosCarousel from "./videos/VideosCarousel";
-
-import "./App.css";
 
 const Queries = gql`
   {
@@ -19,12 +14,13 @@ const Queries = gql`
       actors
       rating
       covertImage
+      fullImage
       synopsis
       mediaContent
     }
     topMovies: allMovies(
       orderBy: { released: -1 }
-      filter: { released: { from: "2017", to: "2019" } }
+      filter: { released: { from: "2017", to: "2020" } }
       pageSize: 10
       page: 1
     ) {
@@ -35,12 +31,13 @@ const Queries = gql`
       actors
       rating
       covertImage
+      fullImage
       synopsis
       mediaContent
     }
     recentlyUpdated: allMovies(
       orderBy: { dateUpdated: -1 }
-      filter: { dateUpdated: { from: "2018", to: "2019" } }
+      filter: { dateUpdated: { from: "2018", to: "2020" } }
       pageSize: 10
       page: 1
     ) {
@@ -51,13 +48,14 @@ const Queries = gql`
       actors
       rating
       covertImage
+      fullImage
       synopsis
       mediaContent
     }
   }
 `;
 
-class App extends Component {
+class MoviesContainer extends Component {
   state = {
     msg: ""
   };
@@ -68,8 +66,10 @@ class App extends Component {
             <div>Loading...</div>
           ) : (
             <React.Fragment>
-              <div className="mainBillboard">
-                <h1>Banner</h1>
+              <div className="mainBillboard" style={{backgroundColod:"black"}}>
+                <h1>Banner | {this.props.data.topMovies[0].title}</h1>
+                <img className="container" alt="" src={this.props.data.topMovies[0].fullImage} />
+                
               </div>
               <Videos
                 videos={this.props.data.recentlyUpdated}
@@ -87,4 +87,4 @@ class App extends Component {
   }
 }
 
-export default graphql(Queries)(App);
+export default graphql(Queries)(MoviesContainer);

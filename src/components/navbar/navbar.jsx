@@ -1,9 +1,11 @@
 import React, { Component } from "react";
+import {Link} from "react-router-dom";
+
 
 export default props => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
-      <a className="navbar-brand" href="#">
+      <a className="navbar-brand" href="/">
         Infinite
       </a>
       <button
@@ -46,16 +48,14 @@ export default props => {
             </div>
           </li>
           <li className="nav-item active">
-            <a className="nav-link" href="#">
-              Home <span className="sr-only">(current)</span>
-            </a>
+            <Link to="/movies" className="nav-link">Movies</Link>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="#">
-              Link
-            </a>
+            <Link to="/series"className="nav-link">Series</Link>
           </li>
-          
+          <li className="nav-item">
+            <Link to="/carousel"className="nav-link">Carousel</Link>
+          </li>
           <li className="nav-item">
             <a className="nav-link disabled" href="#">
               Disabled

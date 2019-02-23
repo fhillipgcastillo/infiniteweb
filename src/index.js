@@ -3,10 +3,11 @@ import ReactDOM from "react-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "./index.css";
 
-import App from "./components/App";
+// import App from "./components/App";
 import * as serviceWorker from "./serviceWorker";
 import { ApolloProvider } from "react-apollo";
 import { ApolloClient, HttpLink, InMemoryCache } from "apollo-client-preset";
+import RouterMap from "./router";
 
 const HOSTNAME = "http://localhost";
 const PORT = 8080;
@@ -21,7 +22,8 @@ const client = new ApolloClient({
 
 ReactDOM.render(
   <ApolloProvider client={client}>
-    <App />
+    {/* <App /> */}
+    <RouterMap />
   </ApolloProvider>,
   document.getElementById("root")
 );

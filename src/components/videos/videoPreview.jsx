@@ -25,7 +25,7 @@ class VideoPreview extends Component {
     console.log(this.props);
     return (
       // <a href={"/movies/" + this.props.id} className="col-12 col-sm-4">
-      <a href={this.props.mediaContent} className="col-12 col-sm-4" target="_blank">
+      <a href={this.props.mediaContent} className="movie-item col-12 col-sm-4" target="_blank">
         <img className="card-img-top" src={this.props.covertImage} alt="" />
         <div className="card-body">
           <h5 className="card-title">
