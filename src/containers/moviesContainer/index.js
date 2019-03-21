@@ -18,11 +18,11 @@ const Queries = gql`
       synopsis
       mediaContent
     }
-    topMovies: allMovies(
+    topMovies:  allMovies(
       orderBy: { released: -1 }
-      filter: { released: { from: "2017", to: "2020" } }
-      pageSize: 10
-      page: 1
+      filter: { released: { from: "2017", to: "2019" } }
+      limit: 10
+      skip: 0
     ) {
       id
       title
@@ -38,8 +38,8 @@ const Queries = gql`
     recentlyUpdated: allMovies(
       orderBy: { dateUpdated: -1 }
       filter: { dateUpdated: { from: "2018", to: "2020" } }
-      pageSize: 10
-      page: 1
+      limit: 10
+      skip: 0
     ) {
       id
       title
@@ -66,11 +66,13 @@ class MoviesContainer extends Component {
             <div>Loading...</div>
           ) : (
             <React.Fragment>
+              {this.props.data && this.props.data.topMovies.length > 0 
+              ?
               <div className="mainBillboard" style={{backgroundColod:"black"}}>
-                <h1>Banner | {this.props.data.topMovies[0].title}</h1>
+                <h1>Banner </h1>
                 <img className="container" alt="" src={this.props.data.topMovies[0].fullImage} />
-                
               </div>
+              : null}
               <Videos
                 videos={this.props.data.recentlyUpdated}
                 title="Recently Updated Videos"
@@ -91,4 +93,4 @@ class MoviesContainer extends Component {
   }
 }
 
-export default graphql(Queries)(MoviesContainer);
+export default graphql(Queries, {$limit: 10, $skip:0})(MoviesContainer);
