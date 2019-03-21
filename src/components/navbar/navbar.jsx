@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import {Link} from "react-router-dom";
-
+import { Link } from "react-router-dom";
 
 export default props => {
+  console.log(props.data);
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <a className="navbar-brand" href="/">
@@ -19,10 +19,14 @@ export default props => {
       >
         <span className="navbar-toggler-icon" />
       </button>
-
+      <select>
+        {props.data.genres.map((g, i) => (
+          <option key={i}>{g.name}</option>
+        ))}
+      </select>
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <ul className="navbar-nav mr-auto">
-        <li className="nav-item dropdown">
+          <li className="nav-item dropdown">
             <a
               className="nav-link dropdown-toggle"
               href="#"
@@ -32,29 +36,31 @@ export default props => {
               aria-haspopup="true"
               aria-expanded="false"
             >
-              Categories
+              Genres
             </a>
+            
             <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a className="dropdown-item" href="#">
-                Action
+            {props.data.genres.map((g, i) => (
+              <a  key={i} className="dropdown-item" href="#">
+                {g.name}
               </a>
-              <a className="dropdown-item" href="#">
-                Another action
-              </a>
-              <div className="dropdown-divider" />
-              <a className="dropdown-item" href="#">
-                Something else here
-              </a>
+            ))}
             </div>
           </li>
           <li className="nav-item active">
-            <Link to="/movies" className="nav-link">Movies</Link>
+            <Link to="/movies" className="nav-link">
+              Movies
+            </Link>
           </li>
           <li className="nav-item">
-            <Link to="/series"className="nav-link">Series</Link>
+            <Link to="/series" className="nav-link">
+              Series
+            </Link>
           </li>
           <li className="nav-item">
-            <Link to="/carousel"className="nav-link">Carousel</Link>
+            <Link to="/carousel" className="nav-link">
+              Carousel
+            </Link>
           </li>
           <li className="nav-item">
             <a className="nav-link disabled" href="#">
@@ -77,28 +83,28 @@ export default props => {
           </button>
         </form>
         <div className="dropdown">
-            <a
-              className="nav-link dropdown-toggle"
-              href="#"
-              id="userMenu"
-              role="button"
-              data-toggle="dropdown"
-            >
-              Users
+          <a
+            className="nav-link dropdown-toggle"
+            href="#"
+            id="userMenu"
+            role="button"
+            data-toggle="dropdown"
+          >
+            Users
+          </a>
+          <div className="dropdown-menu" aria-labelledby="userMenu">
+            <a className="dropdown-item" href="#">
+              Action
             </a>
-            <div className="dropdown-menu" aria-labelledby="userMenu">
-              <a className="dropdown-item" href="#">
-                Action
-              </a>
-              <a className="dropdown-item" href="#">
-                Another action
-              </a>
-              <div className="dropdown-divider" />
-              <a className="dropdown-item" href="#">
-                Something else here
-              </a>
-            </div>
+            <a className="dropdown-item" href="#">
+              Another action
+            </a>
+            <div className="dropdown-divider" />
+            <a className="dropdown-item" href="#">
+              Something else here
+            </a>
           </div>
+        </div>
       </div>
     </nav>
   );

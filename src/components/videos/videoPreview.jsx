@@ -22,7 +22,7 @@ const styles = {
 class VideoPreview extends Component {
   state = {};
   render() {
-    console.log(this.props);
+    // console.log(this.props);
     return (
       // <a href={"/movies/" + this.props.id} className="col-12 col-sm-4">
       <a href={this.props.mediaContent} className="movie-item col-12 col-sm-4" target="_blank">

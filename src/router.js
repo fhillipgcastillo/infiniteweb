@@ -7,8 +7,17 @@ import Navbar from "./components/navbar/navbar";
 // import App from "./components/App";
 import MoviesContainer from "./containers/moviesContainer";
 import SeriesContainer from "./containers/seriesContainer";
-import VideosCarousel, {BootstrapCarousel} from "./components/videos/VideosCarousel";
+// import VideosCarousel, {BootstrapCarousel} from "./components/videos/VideosCarousel";
+import gql from "graphql-tag";
+import { graphql } from "react-apollo";
 
+const Queries = gql`
+  query{
+    genres:getAllGenres{
+      name
+    }
+  }
+`;
 
 class RouterMap extends Component {
   state = {
@@ -18,32 +27,35 @@ class RouterMap extends Component {
   render() {
     return (
       <BrowserRouter>
-        <div>
-          <Navbar />
-          <div className="container-fluid">
-            <div className="container">
-              <Switch>
-                <Route
-                  exact
-                  path="/"
-                  render={state => <MoviesContainer martch={state.match} />}
-                />
-                <Route
-                  exact
-                  path="/movies"
-                  render={state => <MoviesContainer martch={state.match} />}
-                />
-                <Route
-                  exact
-                  path="/series"
-                  render={state => <SeriesContainer martch={state.match} />}
-                />
-                <Route
+        {this.props.data.loading ? (
+          <div>Loading...</div>
+        ) : (
+          <div>
+            <Navbar data={this.props.data}zl/>
+            <div className="container-fluid">
+              <div className="container">
+                <Switch>
+                  <Route
+                    exact
+                    path="/"
+                    render={state => <MoviesContainer martch={state.match} />}
+                  />
+                  <Route
+                    exact
+                    path="/movies"
+                    render={state => <MoviesContainer martch={state.match} />}
+                  />
+                  <Route
+                    exact
+                    path="/series"
+                    render={state => <SeriesContainer martch={state.match} />}
+                  />
+                  {/* <Route
                   exact
                   path="/carousel"
                   render={state => <BootstrapCarousel martch={state.match} />}
-                />
-                {/* <Route
+                /> */}
+                  {/* <Route
               path="/p=:currentPageNumber"
               render={state => <Videos videos={videosData} currentPageNumber={state.match.params.currentPageNumber}/>}
             />
@@ -51,12 +63,13 @@ class RouterMap extends Component {
               path="/movies/:movieId"
               render={ state => <Video {...state.match} />}
             /> */}
-              </Switch>
+                </Switch>
+              </div>
             </div>
           </div>
-        </div>
+        )}
       </BrowserRouter>
     );
   }
 }
-export default RouterMap;
+export default graphql(Queries)(RouterMap);
