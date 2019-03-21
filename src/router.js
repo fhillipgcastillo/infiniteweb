@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 // import videosData from "./videos.json";
 import Navbar from "./components/navbar/navbar";
 // import Video from "./components/videos/video";
-import App from "./components/App";
+// import App from "./components/App";
 import MoviesContainer from "./containers/moviesContainer";
 import SeriesContainer from "./containers/seriesContainer";
 import VideosCarousel, {BootstrapCarousel} from "./components/videos/VideosCarousel";

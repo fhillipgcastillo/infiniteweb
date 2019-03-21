@@ -12,3 +12,30 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+.mainBillboard {
+  height: 56.25vw;
+  width: 100%;
+}
+.card-body {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  color: #2c1082c7;
+  background-color: #2196F3;
+  overflow: auto;
+  height: 100%;
+}
+
+.movie-item:hover > .card-body {
+  opacity: 1;
+}

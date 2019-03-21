@@ -8,17 +8,15 @@ import * as serviceWorker from "./serviceWorker";
 import { ApolloProvider } from "react-apollo";
 import { ApolloClient, HttpLink, InMemoryCache } from "apollo-client-preset";
 import RouterMap from "./router";
+import config from "./config";
 
-const HOSTNAME = "http://localhost";
-const PORT = 8080;
-
-const uri = `${HOSTNAME}:${PORT}/api`;
-const httpLink = new HttpLink({ uri: uri });
-
+/* setting up graphql client connection to server */
+const httpLink = new HttpLink({ uri: config.apiUri });
 const client = new ApolloClient({
   link: httpLink,
   cache: new InMemoryCache()
 });
+/* setting up graphql api server ends */
 
 ReactDOM.render(
   <ApolloProvider client={client}>

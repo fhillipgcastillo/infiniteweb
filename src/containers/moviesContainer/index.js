@@ -79,6 +79,10 @@ class MoviesContainer extends Component {
                 videos={this.props.data.topMovies}
                 title="Top Last Years Videos"
               />
+              <Videos
+                videos={this.props.data.lastMovies}
+                title="Top Last Years Videos"
+              />
               {/* <VideosCarousel /> */}
             </React.Fragment>
           )}
