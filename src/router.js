@@ -7,6 +7,8 @@ import Navbar from "./components/navbar/navbar";
 // import App from "./components/App";
 import MoviesContainer from "./containers/moviesContainer";
 import SeriesContainer from "./containers/seriesContainer";
+import SearchContainer from "./containers/searchContainer";
+
 // import VideosCarousel, {BootstrapCarousel} from "./components/videos/VideosCarousel";
 import gql from "graphql-tag";
 import { graphql } from "react-apollo";
@@ -22,7 +24,10 @@ const Queries = gql`
 class RouterMap extends Component {
   state = {
     currentPageNumber: 1,
-    currentUser: {}
+    currentUser: {},
+    data: {
+      genres: []
+    }
   };
   render() {
     return (
@@ -31,29 +36,34 @@ class RouterMap extends Component {
           <div>Loading...</div>
         ) : (
           <div>
-            <Navbar data={this.props.data}zl/>
+            <Navbar data={this.props.data}/>
             <div className="container-fluid">
               <div className="container">
                 <Switch>
                   <Route
                     exact
                     path="/"
-                    render={state => <MoviesContainer martch={state.match} />}
+                    render={state => <MoviesContainer match={state.match} />}
                   />
                   <Route
                     exact
                     path="/movies"
-                    render={state => <MoviesContainer martch={state.match} />}
+                    render={state => <MoviesContainer match={state.match} />}
                   />
                   <Route
                     exact
                     path="/series"
-                    render={state => <SeriesContainer martch={state.match} />}
+                    render={state => <SeriesContainer match={state.match} />}
+                  />
+                  <Route
+                    exact
+                    path="/search"
+                    render={state => <SearchContainer match={state.match} />}
                   />
                   {/* <Route
                   exact
                   path="/carousel"
-                  render={state => <BootstrapCarousel martch={state.match} />}
+                  render={state => <BootstrapCarousel match={state.match} />}
                 /> */}
                   {/* <Route
               path="/p=:currentPageNumber"

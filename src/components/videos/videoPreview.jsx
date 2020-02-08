@@ -7,8 +7,7 @@ import { withStyles } from "@material-ui/core/styles";
 // import CardMedia from "@material-ui/core/CardMedia";
 // import Button from "@material-ui/core/Button";
 // import Typography from "@material-ui/core/Typography";
-import moment from 'moment';
-
+import moment from "moment";
 
 const styles = {
   card: {
@@ -25,14 +24,35 @@ class VideoPreview extends Component {
     // console.log(this.props);
     return (
       // <a href={"/movies/" + this.props.id} className="col-12 col-sm-4">
-      <a href={this.props.mediaContent} className="movie-item col-12 col-sm-4" target="_blank">
+      <a
+        href="#"
+        className="movie-item col-12 col-sm-4"
+        target="_blank"
+      >
         <img className="card-img-top" src={this.props.covertImage} alt="" />
         <div className="card-body">
           <h5 className="card-title">
-            {this.props.title + " " +(moment(new Date(parseInt(this.props.released))).format("YYYY")) + " "}
+            {this.props.title +
+              " " +
+              moment(new Date(parseInt(this.props.released))).format("YYYY") +
+              " "}
           </h5>
           <p className="card-text">{this.props.synopsis}</p>
           <p className="card-text">{this.props.rating}</p>
+          <a
+            href={this.props.trailer}
+            className="btn btn-default"
+            target="_blank"
+          >
+            Trailer
+          </a>
+          <a
+            href={this.props.mediaContent}
+            className="btn btn-default"
+            target="_blank"
+          >
+            Movie
+          </a>
           {/* <a href={"/movies/" + this.props.id} className="btn btn-primary">
             Go somewhere
           </a> */}

@@ -17,6 +17,7 @@ const Queries = gql`
       fullImage
       synopsis
       mediaContent
+      trailer
     }
     topMovies:  allMovies(
       orderBy: { released: -1 }
@@ -34,6 +35,7 @@ const Queries = gql`
       fullImage
       synopsis
       mediaContent
+      trailer
     }
     recentlyUpdated: allMovies(
       orderBy: { dateUpdated: -1 }
@@ -51,6 +53,7 @@ const Queries = gql`
       fullImage
       synopsis
       mediaContent
+      trailer
     }
   }
 `;
